@@ -1,0 +1,19 @@
+{
+  "name": "food_app_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/chai": "^4.3.19",
+    "@types/jest": "^29.5.13",
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
