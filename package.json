@@ -10,6 +10,7 @@
   "description": "food app backend",
   "dependencies": {
     "@types/node": "^22.5.5",
+    "dotenv": "^16.4.5",
     "lite-server": "^2.6.1",
     "mocha": "^10.7.3",
     "mongoose": "^8.6.3",
