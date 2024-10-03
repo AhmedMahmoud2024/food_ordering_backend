@@ -3,18 +3,23 @@ import SignInUseCase from "../usecases/SignInUseCase";
 import SignupUseCase from "../usecases/SignupUseCase";
 import SignupUsecase from "../usecases/SignupUseCase";
 import * as express from 'express'
+import SignOutUseCase from "../usecases/ٍSignoutUseCase";
+
 export default class AuthController{
   private readonly signInUseCase:SignInUseCase
   private readonly signUpUseCase:SignupUseCase
+  private readonly signOutUseCase: SignOutUseCase;
   private readonly tokenService:ITokenService
 
     constructor(
         signInUseCase:SignInUseCase,
         signUpUseCase:SignupUsecase,
+        signOutUseCase: SignOutUseCase,
         tokenService:ITokenService
     ){
         this.signInUseCase = signInUseCase,
         this.signUpUseCase = signUpUseCase,
+        this.signOutUseCase = signOutUseCase,
         this.tokenService = tokenService
     }
 
@@ -43,4 +48,21 @@ export default class AuthController{
        
         }
        }
+    async signout(req: express.Request, res: express.Response): Promise<void> {
+        const userId = (req as any).user?.id; // Type assertion to avoid TypeScript error
+        const token = req.headers.authorization?.split(' ')[1]; // Assuming Bearer token
+
+        if (!userId || !token) {
+            res.status(400).json({ message: 'User ID and token are required' });
+            return;
+        }
+
+        const success = await this.signOutUseCase.execute(userId);
+
+        if (success) {
+            res.status(200).json({ message: 'Successfully signed out' });
+        } else {
+            res.status(400).json({ message: 'Sign out failed' });
+        }
+    }
 }
